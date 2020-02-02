@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h2>Register For Scolarships.</h2>
+<form action="/submit" method="post">
+  <h5>First Name</h5>
+  <input required type="text" name="firstName" placeholder="First Name" autocomplete="off" autofocus><br>
+  <h5>Last Name</h5>
+  <input required type="text" name="lastName" placeholder="Last Name" autocomplete="off"><br>
+  <h5>University</h5>
+  <input required type="text" name="university" placeholder="University" autocomplete="off"><br>
+  <h5>Email Address</h5>
+  <input required type="text" name="email" placeholder="Email Adress" autocomplete="off"><br>
+  <input type="submit" value="Submit">
+</form>
+<script src="../static/javascript/index.js"></script>
+{% endblock %}
