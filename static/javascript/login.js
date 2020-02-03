@@ -7,10 +7,5 @@ document.querySelector('form').onsubmit = function() {
     return false;
   }
 
-  domain = email.slice(email.indexOf('@') + 1);
-  if (domain != 'gmail.com' && domain != 'yahoo.com' && domain != 'outlook.com') {
-    alert('You must provide a valid domain for your email address!');
-    return false;
-  }
-  
+
 };

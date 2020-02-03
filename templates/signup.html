@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h2>Welcome to Nikhin tasks.</h2>
+<form action="/signup" method="post">
+  <p>Email:</p><input required type="text" name="email" placeholder="Email" autocomplete="off" autofocus><br>
+  <p>Password:</p><input required type="text" name="password" placeholder="Password" autocomplete="off" autofocus><br>
+  <input type="submit" value="Sign up">
+  <p>Already signed up? Then <a href="/login">login</a></p>
+</form>
+<script src="../static/javascript/signup.js"></script>
+{% endblock %}
