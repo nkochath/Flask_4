@@ -63,12 +63,12 @@ def tasks():
     tasks = get_tasks()
     return render_template('tasks.html', tasks=tasks)
 
-@app.route('/delete')
+@app.route('/deletetask', methods=['POST'])
 def delete():
-    number = request.form.get('number')
+    name = request.form.get('name')
 
     db = get_db()
-    sql = 'DELETE FROM tasks WHERE id = :number'
+    sql = 'DELETE FROM tasks WHERE name = :name'
     with db:
         db.cursor().execute(sql, {'number': number})
     return "Task Deleted"
