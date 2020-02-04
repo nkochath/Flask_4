@@ -2,5 +2,16 @@
 {% block body %}
 
 <h2>Welcome to your tasks.</h2>
+<h3>Add a task</h3>
 
+<p>Task Name:</p>
+
+<form action="new_task" method="post">
+<input required type="text" placeholder="Task Name" name="task_name"><br>
+
+<textarea name="task_description" rows="8" cols="50"></textarea><br>
+
+<input type="submit" value="Add Task">
+<p>See all your tasks here matey! <a href="/tasks">task list</a></p>
+</form>
 {% endblock %}

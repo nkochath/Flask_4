@@ -4,6 +4,7 @@ import os
 app = Flask(__name__)
 
 
+
 @app.route('/')
 def index():
     return render_template('signup.html')
@@ -39,6 +40,37 @@ def login():
     if check_password(email, password):
         return redirect('/user_home')
 
+@app.route('/new_task', methods=['POST'])
+def new_task():
+    task_name = request.form.get('task_name')
+    task_description = request.form.get('task_description')
+    write_task(task_name, task_description)
+
+    return redirect('/user_home')
+
+@app.route('/edittask', methods=['POST'])
+def edit_task():
+    name = request.form.get('name')
+    description = request.form.get('description')
+    db = get_db()
+    sql = 'UPDATE tasks SET description = :description WHERE name = :name'
+    with db:
+        db.cursor().execute(sql, {'name': name, 'description': description})
+    return redirect('/tasks')
+
+@app.route('/tasks')
+def tasks():
+    tasks = get_tasks()
+    return render_template('tasks.html', tasks=tasks)
+
+def get_tasks():
+    db = get_db()
+    sql = 'SELECT * FROM tasks'
+    with db:
+        rows = db.cursor().execute(sql)
+        return rows.fetchall()
+
+
 def check_password(email, password):
     db = get_db()
     sql = 'SELECT * FROM users WHERE email = :email'
@@ -68,7 +100,13 @@ def check_user_exists(email):
         else:
             print('User does not exist returning False.')
             return False
+def write_task(name, description):
+    task = {'name': name, 'description':description}
 
+    db = get_db()
+    sql = 'INSERT INTO tasks (name, description) VALUES (:name, :description)'
+    with db:
+        db.cursor().execute(sql, task)
 
 def get_db():
     db = sqlite3.connect('tasks.db')
