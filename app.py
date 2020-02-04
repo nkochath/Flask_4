@@ -56,12 +56,22 @@ def edit_task():
     sql = 'UPDATE tasks SET description = :description WHERE name = :name'
     with db:
         db.cursor().execute(sql, {'name': name, 'description': description})
-    return redirect('/tasks')
+    return "Task Updated"
 
 @app.route('/tasks')
 def tasks():
     tasks = get_tasks()
     return render_template('tasks.html', tasks=tasks)
+
+@app.route('/delete')
+def delete():
+    number = request.form.get('number')
+
+    db = get_db()
+    sql = 'DELETE FROM tasks WHERE id = :number'
+    with db:
+        db.cursor().execute(sql, {'number': number})
+    return "Task Deleted"
 
 def get_tasks():
     db = get_db()
