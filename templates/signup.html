@@ -8,5 +8,5 @@
   <input type="submit" value="Sign up">
   <p>Already signed up? Then <a href="/login">login</a></p>
 </form>
-<script src="../static/javascript/signup.js"></script>
+<script src="{{ url_for('static', filename='javascript/signup.js') }}"></script>
 {% endblock %}

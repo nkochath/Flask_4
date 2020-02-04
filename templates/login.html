@@ -7,5 +7,5 @@
   <p>Password</p><input required type="text" name="password" placeholder="Password" autocomplete="off" autofocus><br>
   <input type="submit" value="Login">
 </form>
-<script src="../static/javascript/login.js"></script>
+<script src="{{ url_for('static', filename='javascript/login.js') }}"></script>
 {% endblock %}

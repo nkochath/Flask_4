@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 import os
+
 app = Flask(__name__)
 
 
@@ -70,7 +71,7 @@ def delete():
     db = get_db()
     sql = 'DELETE FROM tasks WHERE name = :name'
     with db:
-        db.cursor().execute(sql, {'number': number})
+        db.cursor().execute(sql, {'name': name})
     return "Task Deleted"
 
 def get_tasks():
@@ -121,3 +122,6 @@ def write_task(name, description):
 def get_db():
     db = sqlite3.connect('tasks.db')
     return db
+
+if __name__ == '__main__':
+    app.run(debug=True)
